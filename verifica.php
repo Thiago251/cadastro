@@ -52,11 +52,36 @@ if (empty($analisesuporte)) {
 //Verifica se não houve erro - neste caso chama a include para inserir os dados
 if ($erro == 0) {
 	echo "Todos os dados foram digitados corretamente.<br>";
-	include 'insere.php';
+	//include 'insere.inc';
 
 }
 
+//conexão com o banco de dados
 
+ $Servidor = "localhost";
+ $Banco = "reparo";
+ $user = "root";
+ $senha = "";
+
+
+ $con = mysql_connect($localhost, $Banco, $user, $senha);
+
+//verifica se a conexão esta ok
+
+ if (!$con) {
+ 	die("conexao falhou.". mysqli_connect_error());
+ }
+
+ $sql = INSERT INTO cadastro ('ns', 'op', 'modelo', 'sintoma', 'acao', 'analisesuporte') VALUES ('$ns','$op', '$modelo', '$sintoma', '$acao' , '$analisesuporte');
+
+
+ $rs = mysql_query($con, $sql);
+
+ //Condição para confirmar se foi cadastrado
+
+ if ($rs) {
+ 	echo "Cadastrado com sucesso";
+ }
 
  ?>
 
@@ -72,6 +97,8 @@ if ($erro == 0) {
 <center>
 	
 </center>
+
+
 
 </body>
 </html>
